@@ -1,0 +1,595 @@
+﻿@using System.IO
+@using Azure.Core
+@using Azure.Identity;
+@using Microsoft.Graph
+@using Microsoft.Graph.Models;
+@using Microsoft.Extensions.Configuration
+@using Kms.Services
+@using Serilog
+@rendermode InteractiveServer
+
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject GraphClientService graphClientService
+@inject SharePointList sharePointList
+@inject NavigationManager NavigationManager
+@page "/addmail"
+
+<h2>Ajouter un nouveau courrier</h2>
+<div class="container">
+
+    <form>
+        <div class="row m-4">
+            <div class="col-lg-6">
+                <label for="mailtype">Type de courrier</label>
+                @* <select class="form-control mt-2" id="mailtype" @bind="MailType" @oninput="ValidateForm">
+                    <option value="" disabled selected></option>
+                    <option value="Courrier Départ">Courrier Départ</option>
+                    <option value="Courrier Arrivée">Courrier Arrivée</option>
+                    <option value="Courrier Interne">Courrier Interne</option>
+                </select> *@
+                <select class="form-control mt-2" id="mailtype" @bind="MailType" @oninput="ValidateForm">
+                    @if (IsSecretaire(userConnected, userIsSecretaire))
+                    {
+                        <option value="" disabled selected></option>
+                        <option value="Courrier Départ">Courrier Départ</option>
+                        <option value="Courrier Arrivée">Courrier Arrivée</option>
+                    }
+                    else
+                    {
+                        <option value="" disabled selected></option>
+                        <option value="Courrier Interne">Courrier Interne</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <label for="priority">Priorité</label>
+                <select class="form-control mt-2" id="priority" @bind="Priority" @oninput="ValidateForm">
+                    <option value="" disabled selected></option>
+                    <option value="Normal">Normal</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Très Urgent">Très Urgent</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-lg-6">
+                <label for="subject">Objet du courrier</label>
+                <input id="subject" class="form-control mt-2" type="text" @bind="Subject" @oninput="ValidateForm" />
+            </div>
+            <div class="col-lg-6">
+                <label for="sender">Expéditeur</label>
+                <select class="form-control mt-2" id="sender" @bind="Sender" @oninput="ValidateForm">
+                    <option value="" disabled selected></option>
+                    @if (MailType == "Courrier Arrivée")
+                    {
+                        @foreach (var m in allContacts)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName : @m.CompanyName</option>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var m in allUsers)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-lg-3">
+                <label for="maildate">Date du courrier</label>
+                <input id="maildate" class="form-control mt-2" type="date" @bind="MailDate" @oninput="ValidateForm" />
+            </div>
+            <div class="col-lg-3">
+                <label for="arrivaldate">Date d'arrivée du courrier</label>
+                <input id="arrivaldate" class="form-control  mt-2" type="date" @bind="ArrivalDate" @oninput="ValidateForm" />
+            </div>
+            <div class="col-lg-6">
+                <label for="processor">Entité traitante</label>
+                <select class="form-control mt-2" id="processor" @bind="Processor" @oninput="ValidateForm">
+                    <option value="" disabled selected></option>
+                    @if (MailType == "Courrier Départ")
+                    {
+                        @foreach (var m in allGroups)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName </option>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var m in allUsers)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-lg-6">
+                <label for="groupMember">Destinataire</label>
+                <select class="form-control mt-2" id="groupMember" @bind="selectedMembers" @oninput="ValidateForm">
+                    <option value="" disabled selected></option>
+                    @if (Processor == "Service technique")
+                    {
+                    @foreach (var member in selectedGroupMembers)
+                    {
+                        @if (member is User user)
+                        {
+                            <option value="@user.Id">@user.DisplayName</option>
+                        }
+
+                    }
+                    }
+
+                    @if (Processor == "responsable courrier")
+                    {
+                        @foreach (var member in selectedGroupMembers1)
+                        {
+                            @if (member is User user)
+                            {
+                                <option value="@user.Id">@user.DisplayName</option>
+                            }
+
+                        }
+                    }
+
+                    @if (Processor == "Approvals App Admin team")
+                    {
+                        @foreach (var member in selectedGroupMembers2)
+                        {
+                            @if (member is User user)
+                            {
+                                <option value="@user.Id">@user.DisplayName</option>
+                            }
+
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-lg-6">
+                <InputFile class="form-control" OnChange="HandleFileChange" />
+            </div>
+            <div class="col-6">
+                <select class="form-control" @bind="Actions">
+                    <option value="" disabled selected></option>
+                    <option value="Envoyer en Validation">Envoyer en Validation</option>
+                    <option value="Envoyer en Traitement">Envoyer en Traitement</option>
+                </select>
+            </div>
+
+        </div>
+
+    </form>
+    <div class="d-grid gap-2 col-3 mx-auto">
+        @* <button class="btn btn-primary btn-lg" type="button" @onclick="HandleItemCreation">Attribuer le courrier</button> *@
+
+        <ConfirmDialog @ref="dialogAddCourrier" />
+
+        <Button Color="ButtonColor.Primary" @onclick="ShowDialogAsync">Attribuer le courrier </Button>
+    </div>
+    <div>@ErrorMessage</div>
+</div>
+
+
+@code {
+    private bool isFormValid = false;
+    private IList<ListItem> userlist = new List<ListItem>();
+    private IList<ListItem> folderList = new List<ListItem>();//liste qui contient tout les dossiers dans la bibliothèque de documents
+    private List<ListItem> selectedFolder = new List<ListItem>();//Les informations sur le dossier du courrier en tant qu'item d'une liste
+    private IList<User> allUsers = new List<User>();//Liste des utilisateurs
+    private IList<OrgContact> allContacts = new List<OrgContact>();//Listes des contacts de l'orgagnisation
+    private IList<Group> allGroups = new List<Group>();
+    private IList<DirectoryObject> selectedGroupMembers = new List<DirectoryObject>();
+    private IList<DirectoryObject> selectedGroupMembers1 = new List<DirectoryObject>();
+    private IList<DirectoryObject> selectedGroupMembers2 = new List<DirectoryObject>();
+    private bool isLoading = true;
+    private readonly string _scope = "Sites.ReadWrite.All";//Lire et modifier les élements d'un site
+    private readonly string _scope2 = "User.Read.All";//Lire les informations sur l'utilisateur connecté
+    private readonly string _scope3 = "OrgContact.Read.All";//Lire les informations sur les contacts de l'organisation
+    private string ErrorMessage { get; set; }
+    private string MailType = string.Empty;
+    private string Priority = string.Empty;
+    private DateTime? MailDate = null;
+    private string Subject = string.Empty;
+    private DateTime? ArrivalDate = null;
+    private string Sender = string.Empty;
+    private string Processor = string.Empty;
+    private string selectedMembers = string.Empty;
+    private string Actions = string.Empty;
+    private DateOnly? DepartDate = null;
+    private DateOnly? Deadline = null;
+    //le variables nécessaires pour l'upload du fichier
+    private IBrowserFile fichier;
+    private string fileLink = string.Empty;//lien du document
+    private string folderId = string.Empty;//Id du dossier (driveItemId)
+    private string folderListId = string.Empty;//Id du dossier (listItemId)
+    private ConfirmDialog dialogAddCourrier = default!;//pour l'affichage du dialogue erreur
+    private bool fileIsNotSelected = false;//Permet de verifier si le document a été bien uploadé
+    const int MAX_FILESIZE = 5000 * 1024;//5mb taille limite des fichiers
+    private string userConnected;
+    private IList<User> userIsSecretaire = new List<User>();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await EntityByCourrier();
+
+    }
+
+    private async Task EntityByCourrier()
+    {
+        if (await graphClientService.HasPermission(_scope2))//Vérifie si l'utilisateur à l'autorisation requis pour le scope
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graphClient = graphClientService.GetGraphServiceClient(_scope2, tokenCredential);
+
+
+            //obtenir groupe de sécurité
+            var allgroups = await graphClient.Groups.GetAsync((requestConfiguration) =>
+                        {
+                            requestConfiguration.QueryParameters.Filter = "securityEnabled eq true";
+                        });
+
+            allGroups = allgroups?.Value
+                                  .Where(g => !g.GroupTypes.Any(t => t.Equals("Unified", StringComparison.OrdinalIgnoreCase)))
+                                   .ToList() ?? new List<Group>();
+
+
+            //obtenir membres du groupe de sécurité SERVICE TECHNIQUE
+            var allGroups1 = await graphClient.Groups.GetAsync((requestConfiguration) =>
+                          {
+                              requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
+                              requestConfiguration.QueryParameters.Search = "\"displayName:Service technique\"";
+                          });
+
+            if (allGroups1.Value.Count > 0)
+            {
+                string groupId = allGroups1.Value[0].Id;
+                var allMembers = await graphClient.Groups[groupId].Members.GetAsync();
+                selectedGroupMembers = allMembers?.Value ?? new List<DirectoryObject>();
+            }
+
+
+            //obtenir membres du groupe de sécurité RESPONSABLE COURRIER
+            var allGroups2 = await graphClient.Groups.GetAsync((requestConfiguration) =>
+           {
+               requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
+               requestConfiguration.QueryParameters.Search = "\"displayName:responsable courrier\"";
+           });
+
+            if (allGroups2.Value.Count > 0)
+            {
+                string groupId = allGroups2.Value[0].Id;
+                var allMembers = await graphClient.Groups[groupId].Members.GetAsync();
+                selectedGroupMembers1 = allMembers?.Value ?? new List<DirectoryObject>();
+            }
+
+            //obtenir membres du groupe de sécurité Approvals App Admin team
+            var allGroups3 = await graphClient.Groups.GetAsync((requestConfiguration) =>
+            {
+                requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
+                requestConfiguration.QueryParameters.Search = "\"displayName:Approvals App Admin team\"";
+            });
+
+            if (allGroups3.Value.Count > 0)
+            {
+                string groupId = allGroups3.Value[0].Id;
+                var allMembers = await graphClient.Groups[groupId].Members.GetAsync();
+                selectedGroupMembers2 = allMembers?.Value ?? new List<DirectoryObject>();
+            }
+
+
+            //obtenir tous les utilisateurs Entra id
+
+            var allusers = await graphClient.Users.GetAsync();
+
+            allUsers = allusers?.Value ?? new List<User>();
+
+
+            //obtenir tous les contacts Entra id
+            var allcontacts = await graphClient.Contacts.GetAsync();
+
+            allContacts = allcontacts?.Value ?? new List<OrgContact>();
+        }
+    }
+    //Une fonction pour la validation du formulaire
+    private void ValidateForm()
+    {
+        isFormValid = !string.IsNullOrEmpty(MailType) &&
+                      !string.IsNullOrEmpty(Priority) &&
+                      MailDate.HasValue &&
+                      !string.IsNullOrEmpty(Subject) &&
+                      ArrivalDate.HasValue &&
+                      !string.IsNullOrEmpty(Sender) &&
+                      !string.IsNullOrEmpty(Processor) &&
+                      !string.IsNullOrEmpty(selectedMembers);
+    }
+
+    //Affiche le dialogue
+    private async Task ShowDialogAsync()
+    {
+        ValidateForm();
+
+        if (isFormValid)
+        {
+            var options = new ConfirmDialogOptions { IsVerticallyCentered = true };
+            var confirmation = await dialogAddCourrier.ShowAsync(
+                title: "Attribution de courrier",
+                message1: $"Voulez vous vraiment attribuer ce courrier à: {Processor}?",
+                confirmDialogOptions: options);
+
+            if (confirmation)
+            {
+                await HandleItemCreation();
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            ErrorMessage = "Veillez remplir tout les champs";
+        }
+
+    }
+
+    private async Task HandleItemCreation()
+    {
+        //Vérification des permissions sur un scope
+        if (await graphClientService.HasPermission(_scope))
+        {
+            ErrorMessage = "Authentifié";
+            await CreateDriveItem();//la méthode pour uploader un fichier
+            if (!fileIsNotSelected)
+            {
+                await CreateItem();//la méthode pour créer un item dans la liste Sharepoint
+            }
+
+
+
+        }
+    }
+
+    //le code qui permet de créer un item quand un nouveau courrier veut être attribuer
+    private async Task CreateItem()
+    {
+        isLoading = true;
+
+        if (Actions == "Envoyer en Validation")
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graphClient = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+
+            var currentDateTime = DateTime.Now;
+            var newMail = new ListItem
+                {
+                    Fields = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                    {
+                        { "Title", Subject },
+                        { "mailType", MailType },
+                        { "priority", Priority },
+                        { "sender" , Sender },
+                        { "mailDate" , MailDate?.ToString("yyyy-MM-dd") ?? string.Empty },
+                        { "arrivalDate" , ArrivalDate?.ToString("yyyy-MM-dd") ?? string.Empty },
+                        { "processor" , Processor },
+                        {"statutMail", "VLD"},
+                        {"assignDate", currentDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},
+                        {"fileId", fileLink},
+                        { "folderId", folderId}
+                    }
+                    }
+                };
+
+
+
+            //Requête d'ajout d'un item dans la liste Sharepiont
+            await graphClient.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items.PostAsync(newMail);
+        }
+        else if (Actions == "Envoyer en Traitement")
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graphClient = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+
+            var currentDateTime = DateTime.Now;
+            var newMail = new ListItem
+                {
+                    Fields = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                    {
+                        { "Title", Subject },
+                        { "mailType", MailType },
+                        { "priority", Priority },
+                        { "sender" , Sender },
+                        { "mailDate" , MailDate?.ToString("yyyy-MM-dd") ?? string.Empty },
+                        { "arrivalDate" , ArrivalDate?.ToString("yyyy-MM-dd") ?? string.Empty },
+                        { "processor" , Processor },
+                        {"statutMail", "TRT"},
+                        {"assignDate", currentDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},
+                        {"fileId", fileLink},
+                        { "folderId", folderId},
+                        { "folderListId", folderListId}
+
+                    }
+                    }
+                };
+
+
+
+            //Requête d'ajout d'un item dans la liste Sharepiont
+            await graphClient.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items.PostAsync(newMail);
+        }
+
+        //Remise à zéro des variables
+        MailType = string.Empty;
+        Priority = string.Empty;
+        MailDate = null;
+        Subject = string.Empty;
+        ArrivalDate = null;
+        Sender = string.Empty;
+        Processor = string.Empty;
+
+        isLoading = false;
+    }
+    //La fonction qui s'exécute quand on selectionne un fichier
+    private async Task HandleFileChange(InputFileChangeEventArgs e)
+    {
+        //Vérifie si le fichier selectionné correspond à son type
+        if (e.File is IBrowserFile file)
+        {
+            fichier = e.File;
+            ErrorMessage = $"Fichier sélectionné : {fichier.Name}";
+        }
+        else
+        {
+            ErrorMessage = "fichier non sélectionné";
+        }
+    }
+
+    //le code qui permet l'upload du fichier quand on clique sur le bouton attribuer un courrier
+    private async Task CreateDriveItem()
+    {
+        var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+        var graphClient = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+
+
+        //Si le fichier n'est pas nulle
+        if (fichier != null)
+        {
+
+            try
+            {
+                // Récupérer le contenu du fichier sous forme de tableau de bytes
+                byte[] fileContent;
+                using (var memoryStream = new MemoryStream())
+                {
+                    await fichier.OpenReadStream(MAX_FILESIZE).CopyToAsync(memoryStream);
+                    fileContent = memoryStream.ToArray();
+                }
+
+                // L'ID du dossier dans lequel vous voulez télécharger le fichier
+                var driveId = "b!FPrtewG52km_DGkueqpUdMqUUAe0dGlKm5iT1Kyf3R95sI1N87v5SKX1480SLXpy";
+                var itemId = "01TMEYWDF6Y2GOVW7725BZO354PWSELRRZ";
+
+                //creation du dossier du courrier
+                var requestBody = new DriveItem
+                    {
+                        Name = "Courriel",
+                        Folder = new Folder
+                        {
+                        },
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "@microsoft.graph.conflictBehavior" , "rename"
+                            },
+                        },
+                    };
+                var result = await graphClient.Drives[driveId].Items[itemId].Children.PostAsync(requestBody);
+
+                //Id du dossier du courrier
+                folderId = result.Id;
+
+
+
+                // Nom du fichier à uploader
+                string fileName = fichier.Name;
+
+                // Requête pour uploader le fichier
+                var uploadFileResult = await graphClient.Drives[driveId].Items[folderId].ItemWithPath(fileName).Content.PutAsync(new MemoryStream(fileContent));
+
+
+                fileIsNotSelected = false;
+                ErrorMessage = "fichier uploadé";
+
+                //l'ID de la liste documents (un integer)
+                var listFolder = "4d8db079-bbf3-48f9-a5f5-e3cd122d7a72";
+
+                //recupérer les données sur le dossier du courrier
+                var getFolder = await graphClient.Sites[sharePointList.SiteId].Lists[listFolder].Items.GetAsync();
+
+                folderList = getFolder?.Value ?? new List<ListItem>();
+
+                var filterFolder = (from folder in folderList
+                                    where folder.WebUrl == result.WebUrl
+                                    select folder);
+
+                selectedFolder = filterFolder.ToList();
+
+                foreach (var folder in selectedFolder)
+                {
+                    folderListId = folder.Id;
+                }
+
+                //Requête pour récupérer des informations sur le fichier uploadé
+                var uploadedFile = await graphClient.Drives[driveId].Items[folderId].ItemWithPath(fileName).GetAsync();
+
+                //variable pour récupérer l'url pour accéder au fichier
+                fileLink = uploadedFile.WebUrl;
+                //fileLink = uploadedFile.WebUrl;
+
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = $"Erreur lors de l'upload du fichier : {ex.Message}";
+                fileIsNotSelected = true;
+            }
+
+        }
+        else
+        {
+            ErrorMessage = "Aucun fichier sélectionné";
+            fileIsNotSelected = true;
+        }
+
+    }
+
+    //La méthode qui permet au select d'afficher les types de courriers dont a accès l'user connecté
+    private async Task SelectCourrier()
+    {
+        try
+        {
+            await EntityByCourrier();
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graphClient = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+            // Requête de récupération des informations de l'utilisateur connecté à Teams
+            var user = await graphClient.Me.GetAsync((requestConfiguration) =>
+            {
+                requestConfiguration.QueryParameters.Select = new string[] { "displayName" };
+            });
+            // Affectation du nom de l'utilisateur à la variable filter
+            string userConnected = user.DisplayName;
+
+            //extraire les utilisateurs de l'objet selectedGroupMembers1
+            var userIsSecretaire = selectedGroupMembers1.OfType<User>().ToList();
+
+            // Vérifier si l'utilisateur connecté fait partir des users extrait
+            bool isSecretaire = IsSecretaire(userConnected, userIsSecretaire);
+
+        }
+        catch(Exception ex)
+        {
+            Log.Error(ex, "Problème de connexion");
+        }
+    }
+    // Méthode IsSecretaire
+    private bool IsSecretaire(string userDisplayName, IList<User> groupMembers)
+    {
+        return groupMembers.Any(member => member.DisplayName == userDisplayName);
+    }
+}

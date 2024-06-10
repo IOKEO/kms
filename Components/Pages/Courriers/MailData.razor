@@ -1,0 +1,17 @@
+﻿@using Microsoft.Extensions.Configuration
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Hosting
+@using Kms.Components.Pages.Courriers
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject NavigationManager MyNavigationManager
+@rendermode InteractiveServer
+
+
+
+<MailDetails Id ="@Id"></MailDetails>
+@code {
+    [Parameter]
+    public string Id { get; set; }
+}

@@ -1,0 +1,50 @@
+{
+	"profiles": {
+		// Debug project within Teams
+		"Microsoft Teams (browser)": {
+			"commandName": "Project",
+			"dotnetRunMessages": true,
+			"launchBrowser": true,
+			"launchUrl": "https://teams.microsoft.com/l/app/011020c4-2590-46e9-9ec8-64858334aee6?installAppPackage=true&webjoin=true&appTenantId=4431d0bb-7e97-4ac6-8531-e2727c16fbc8&login_hint=hsb@iokeo.com",
+			"applicationUrl": "https://localhost:44302;http://localhost:2544",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"hotReloadProfile": "aspnetcore"
+		},
+		"Microsoft 365 app (browser)": {
+			"commandName": "Project",
+			"dotnetRunMessages": true,
+			"launchBrowser": true,
+			"launchUrl": "https://www.office.com/m365apps/a2b4b902-7908-45d5-bec6-eab2ce0a314b?auth=2&login_hint=hsb@iokeo.com",
+			"applicationUrl": "https://localhost:44302;http://localhost:2544",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"hotReloadProfile": "aspnetcore"
+		},
+		"Outlook (browser)": {
+			"commandName": "Project",
+			"dotnetRunMessages": true,
+			"launchBrowser": true,
+			"launchUrl": "https://outlook.office.com/host/a2b4b902-7908-45d5-bec6-eab2ce0a314b?login_hint=hsb@iokeo.com",
+			"applicationUrl": "https://localhost:44302;http://localhost:2544",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"hotReloadProfile": "aspnetcore"
+		}
+		//// Uncomment following profile to debug project only (without launching Teams)
+		//,
+		//"Start Project (not in Teams)": {
+		//  "commandName": "Project",
+		//  "dotnetRunMessages": true,
+		//  "launchBrowser": true,
+		//  "applicationUrl": "https://localhost:44302;http://localhost:2544",
+		//  "environmentVariables": {
+		//    "ASPNETCORE_ENVIRONMENT": "Development"
+		//  },
+		//  "hotReloadProfile": "aspnetcore"
+		//}
+	}
+}

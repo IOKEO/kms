@@ -1,0 +1,406 @@
+﻿@using System.IO
+@using System.Linq 
+@using Azure.Core
+@using Azure.Identity;
+@using Microsoft.Graph
+@using Microsoft.Graph.Models;
+@using Microsoft.Extensions.Configuration
+@using Kms.Components.Pages.Courriers
+@using Kms.Services
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject GraphClientService graphClientService
+@inject SharePointList sharePointList
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+@page "/details/{Id}"
+
+
+<div>@ErrorMessage</div>
+@if (isLoading)
+{
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-grow text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+}
+else
+{
+   @if(courrier != null)
+{
+    
+    <h1>Détails du courier</h1>
+    <div class="row mt-4">
+        <div class="col-4">
+            <h5>Objet du courrier</h5>
+            <p>@(courrier.Fields?.AdditionalData["Title"] ?? "")</p>
+            <h5>Priorité</h5>
+            <p>@(courrier.Fields?.AdditionalData["priority"] ?? "")</p>
+            <h5>Expéditeur</h5>
+            <p>@(courrier.Fields?.AdditionalData["sender"] ?? "")</p>
+            <h5>Date du courrier</h5>
+            <p>@(courrier.Fields?.AdditionalData["mailDate"] == null ? "-" : ((DateTime)courrier.Fields?.AdditionalData["mailDate"]).ToLocalTime().ToString("dd/MM/yyyy"))</p>
+            <h5>Date d'arrivée du courrier</h5>
+            <p>@(courrier.Fields?.AdditionalData["arrivalDate"] == null ? "-" : ((DateTime)courrier.Fields?.AdditionalData["arrivalDate"]).ToLocalTime().ToString("dd/MM/yyyy"))</p>
+
+        </div>
+      <div class="col-8 justify-content-center">
+               @*  <PdfViewer Class="mb-3"
+                           Url="/pdfs/sharepoint Certif.pdf"
+                           OnDocumentLoaded="OnDocumentLoaded"
+                           OnPageChanged="OnPageChanged" /> *@
+
+                @* @if (!string.IsNullOrEmpty(courrier.Fields?.AdditionalData["fileId"]?.ToString()))
+                {
+                    <iframe src="@courrier.Fields?.AdditionalData["fileId"]?.ToString()" width="600" height="400"></iframe>
+                    
+                }
+                else
+                {
+                    <p>Le fichier n'est pas disponible.</p>
+                } *@
+
+                <iframe src="" width="600" height="400"></iframe>
+            
+        </div> 
+       
+    </div>
+
+    <form>
+        <div class="row mt-4">
+            <div class="col">
+                <label for="actions">Actions</label>
+                <select class="form-control mt-2" id="actions" @bind="Actions">
+                    <option value="" disabled selected></option>
+                    @if (@courrier.Fields?.AdditionalData["statutMail"].ToString()== "TRT")
+                    {
+                        <option value="Demander avis">Demander avis</option>
+                        <option value="Envoyer pour signature">Envoyer pour signature</option>
+                        <option value="Fin de traitement">Fin de traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "SGN")
+                    {
+                        <option value="Renvoyer le courrier signé">Renvoyer le courrier signé</option>
+                        <option value="Remettre en traitement">Remettre en traitement</option>
+                        <option value="Fin de traitement">Fin de traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "VLD")
+                    {
+                        <option value="Attester réception">Accusé de Réception (AR)</option>
+                        <option value="Remettre en traitement">Remettre en traitement</option>
+                        <option value="Fin de traitement">Fin de traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "ENV")
+                    {
+                        <option value="Fin de traitement">Fin de traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "DAV")
+                    {
+                        <option value="Remettre en traitement">Remettre en traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "CLS")
+                    {
+                        <option value="Remettre en traitement">Remettre en traitement</option>
+                    }
+                    else if (@courrier.Fields?.AdditionalData["statutMail"].ToString() == "REC")
+                    {
+                        <option value="Remettre en traitement">Remettre en traitement</option>
+                        <option value="Fin de traitement">Fin de traitement</option>
+                    }
+                    
+                    
+                    
+                </select>
+            </div>
+            <div class="col">
+                @if (Actions == "Envoyer pour signature")
+                {
+                    <label for="processor">Signataire</label>
+                    <select class="form-control mt-2" id="processor" @bind="Processor">
+                        <option value="" disabled selected></option>
+                        @foreach (var m in allUsers)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName</option>
+                        }
+                    </select>
+                }
+                else if (Actions == "Demander avis")
+                {
+                    <label for="processor">Aviseur</label>
+                    <select class="form-control mt-2" id="processor" @bind="Processor">
+                        <option value="" disabled selected></option>
+                        @foreach (var m in allUsers)
+                        {
+                            <option value="@m.DisplayName">@m.DisplayName</option>
+                        }
+                    </select>
+                }
+            </div>
+            
+        </div>
+    </form>
+    <div class="mt-4">
+        <button class="btn btn-primary form-control" type="button" @onclick="ItemUpdate">Valider</button>
+    </div>
+        
+        
+}
+else{
+    @* <p> Le système à rencontré un problème</p> *@
+    
+} 
+}
+
+    
+
+    
+
+<Preload LoadingText="Chargement des informations du courrier..." />
+
+
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    private string Actions = string.Empty;//La variable qui permet de changer le statut des courriers
+    private ListItem courrier;//la liste contenant les courriers récupérés depuis Sharepoint
+    private readonly string _scope = "Sites.ReadWrite.All";//la permission necéssaire pour la requête
+    private readonly string _scope2 = "User.Read.All";//la permission pour recupérer les utilisateurs
+    private string ErrorMessage { get; set; }//le message d'erreur (facultatif)
+    private string Processor = string.Empty;//lié au champ pour le signataire
+    private IList<User> allUsers = new List<User>();//La liste contenant les utilisateurs récupérés grâce à MS Graph
+    private bool isLoading = true;
+
+    private string username = string.Empty;
+    private string message = string.Empty;
+
+    private string eventLog { get; set; } = $"Last event: ..., CurrentPage: 0, TotalPages: 0";
+
+    private void OnDocumentLoaded(PdfViewerEventArgs args)
+        => eventLog = $"Last event: OnDocumentLoaded, CurrentPage: {args.CurrentPage}, TotalPages: {args.TotalPages}";
+
+    private void OnPageChanged(PdfViewerEventArgs args)
+        => eventLog = $"Last event: OnPageChanged, CurrentPage: {args.CurrentPage}, TotalPages: {args.TotalPages}";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await graphClientService.HasPermission(_scope))//verifier si l'utilisateur à le droit de lire et modifier des infos dans un site sharepoint
+        {
+            
+            await ShowInfos();//Si oui, afficher la liste
+        }
+        else
+        {
+            ErrorMessage = "Vérif failed";
+        }
+
+        if (await graphClientService.HasPermission(_scope2))//Vérifie si l'utilisateur à l'autorisation requis pour le scope
+        {
+            //Création d'un token et création d'un client graph grâce au token 
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graphClient = graphClientService.GetGraphServiceClient(_scope2, tokenCredential);
+
+            //Requête pour recpérer les utilisateurs depuis MS Graph
+            var allusers = await graphClient.Users.GetAsync();
+
+            allUsers = allusers?.Value ?? new List<User>();
+
+            //Requête de récupération des informations de l'utilisateur connecté à Teams:
+            var user = await graphClient.Me.GetAsync((requestConfiguration) =>
+                {
+                    requestConfiguration.QueryParameters.Select = new string[] { "displayName" };
+                });
+            //Affectation du nom de l'utilisateur à la variable filter
+            username = user.DisplayName;
+        }
+
+    }
+
+    private async Task OpenFilePreview()
+    {
+        // Remplacez cette URL par l'URL de votre fichier
+        string fileUrl = "https://iokeo-my.sharepoint.com/:w:/p/hso/ESOlHoIcsvxFpoYKFEb48aIB969pzncvPnMcqRw2f168WQ?e=WwwTdB";
+
+        await JSRuntime.InvokeVoidAsync("Microsoft.Teams.ViewerInstances.previewDocument", fileUrl);
+    }
+    //le code qui affiches les informations relatives au courrier sélectionné
+    private async Task ShowInfos()
+    {
+        isLoading = true;
+        var tokenCredential = await graphClientService.GetOnBehalfOfCredential();//obtenir un token d'authentification
+        var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);//Créer un client graph qui utilise le token précedent
+
+        try
+        {
+            //Requête GET pour récupérer un courrier précis depuis la liste dans sharepoint
+            var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].GetAsync();
+            courrier = result;
+
+            // Construire l'URL du fichier
+            
+        }
+        catch(Exception e)
+        {
+            ErrorMessage = e.Message;
+        }
+        isLoading = false;
+
+    }
+
+    //le formulaire pour modifier les informations au niveau du courrier
+    private async Task ItemUpdate()
+    {
+        if (await graphClientService.HasPermission(_scope))
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+            //Change les informations selon l'option sélectionné
+            if (Actions == "Fin de traitement")//Si l'option est égale à Fin de traitement
+            {
+                var currentDateTime = DateTime.Now;
+                var requestBody = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "statutMail" , "CLS"
+                            },
+                            {
+                                "closingDate", currentDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                            }
+                        },
+                    };
+                var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].Fields.PatchAsync(requestBody);
+                NavigationManager.NavigateTo("/");
+                //NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            }
+            else if (Actions == "Envoyer pour signature")//Si l'option est égale à Envoyer pour signature
+            {
+                var currentDateTime = DateTime.Now;
+                var requestBody = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "statutMail" , "SGN"
+                            },
+                            {
+                                "signatory", Processor
+                            },
+                        },
+                    };
+                var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].Fields.PatchAsync(requestBody);
+                NavigationManager.NavigateTo("/");
+            }
+            else if (Actions == "Attester réception")//Si l'option est égale à Attester réception
+            {
+                var currentDateTime = DateTime.Now;
+                var requestBody = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "statutMail" , "REC"
+                            },
+                            {
+                                "receiveDate", currentDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                            }
+                        },
+                    };
+                var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].Fields.PatchAsync(requestBody);
+                NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            }
+            else if (Actions == "Remettre en traitement")//Si l'option est égale à Remettre en traitement
+            {
+                var requestBody = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "statutMail" , "TRT"
+                            }
+                        },
+                    };
+                var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].Fields.PatchAsync(requestBody);
+                NavigationManager.NavigateTo("/");
+            }
+            else if (Actions == "Demander avis")//Si l'option est égale à Remettre en traitement
+            {
+                var requestBody = new FieldValueSet
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "statutMail" , "DAV"
+                            },
+                            {
+                                "advisory", Processor
+                            }
+                        },
+                    };
+                var result = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items[Id].Fields.PatchAsync(requestBody);
+                Processor = string.Empty;
+                NavigationManager.NavigateTo("/");
+            }
+
+
+
+            Actions = string.Empty;
+
+            
+
+        }
+    }
+
+    private async Task AddComment()
+    {
+
+        if (await graphClientService.HasPermission(_scope))//Vérifie si l'utilisateur à l'autorisation requis pour le scope
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                var newComment = new ListItem
+                    {
+                        Fields = new FieldValueSet
+                        {
+                            AdditionalData = new Dictionary<string, object>
+                    {
+                        { "Title", message },
+                        { "IdCourrier", Id },
+                        { "resp", username }
+                    }
+                        }
+                    };
+
+                //Requête d'ajout d'un item dans la liste Sharepiont
+                try
+                {
+                    await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListCommentId].Items.PostAsync(newComment);
+                }
+                catch (Exception e)
+                {
+                    ErrorMessage = e.Message;
+                }
+                message = string.Empty;
+            }
+            else
+            {
+                ErrorMessage = "Entrez un message pour le commentaires";
+            }
+
+            
+        }
+    }
+
+    
+}

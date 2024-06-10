@@ -1,0 +1,69 @@
+﻿@using System.IO
+@using System.Linq
+@using Azure.Core
+@using Azure.Identity;
+@using Microsoft.Graph
+@using Microsoft.Graph.Models;
+@using Microsoft.Extensions.Configuration
+@using Kms.Components.Pages.Courriers
+@using Kms.Services
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject GraphClientService graphClientService
+@inject SharePointList sharePointList
+@inject NavigationManager NavigationManager
+
+@foreach (var comment in filterComments)
+{
+    <div class="card m-3">
+        <div class="card-body">
+            <h6 class="card-title fs-6">@comment.Fields?.AdditionalData["resp"]</h6>
+            <p class="fs-6">@comment.Fields?.AdditionalData["Title"]</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    private readonly string _scope = "Sites.ReadWrite.All";//la permission necéssaire pour la requête
+    private string ErrorMessage { get; set; }//le message d'erreur (facultatif)
+    private IList<ListItem> comments = new List<ListItem>();//l'objet qui contiendras la liste renvoyé par l'API
+    private IList<ListItem> filterComments = new List<ListItem>();//l'objet qui contiendras la liste renvoyé par l'API
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (await graphClientService.HasPermission(_scope))//Vérifie si l'utilisateur à l'autorisation requis pour le scope
+        {
+
+            await ShowComments();//Si oui, afficher la liste
+        }
+        else
+        {
+            ErrorMessage = "Permission refusée";
+        }
+    }
+
+    protected async Task ShowComments()
+    {
+        var tokenCredential = await graphClientService.GetOnBehalfOfCredential();//obtenir un token d'authentification
+        var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);//Créer un client graph qui utilise le token précedent
+
+        //la requête pour récupérer une liste d'élements depuis un site sharepoint
+        var items = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListCommentId].Items.GetAsync((config) =>
+        {
+            config.QueryParameters.Expand = new[] { "fields" };
+        });
+        comments = items?.Value ?? new List<ListItem>();
+
+        var filterItem = (from comment in comments
+                          where comment.Fields.AdditionalData["IdCourrier"].ToString() == Id
+                          select comment);
+
+        filterComments = filterItem.ToList();   
+    }
+
+
+}

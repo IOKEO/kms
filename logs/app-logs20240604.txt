@@ -1,0 +1,694 @@
+2024-06-04 07:17:17.817 +01:00 [WRN] As of ""2024-06-04T06:17:15.5371200+00:00"", the heartbeat has been running for ""05:49:12.2358424"" which is longer than ""00:00:01"". This could be caused by thread pool starvation.
+2024-06-04 08:08:26.881 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 08:08:28.592 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 08:08:28.592 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 08:08:28.600 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 08:08:28.600 +01:00 [INF] Hosting environment: Development
+2024-06-04 08:08:28.600 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 08:09:02.899 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 08:09:03.304 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 08:09:04.249 +01:00 [INF] Create teams user credential
+2024-06-04 08:09:04.693 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 08:09:04.710 +01:00 [ERR] Connection id "0HN44CKHCJSBU", Request id "0HN44CKHCJSBU:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 08:09:04.828 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/css/template/cs-skin-elastic.css - null null
+2024-06-04 08:09:04.830 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/css/bootstrap/bootstrap.min.css - null null
+2024-06-04 08:09:04.830 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/css/styles.css - null null
+2024-06-04 08:09:05.060 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 2163.5295ms
+2024-06-04 08:09:05.068 +01:00 [INF] The file /css/bootstrap/bootstrap.min.css was not modified
+2024-06-04 08:09:05.068 +01:00 [INF] The file /css/template/cs-skin-elastic.css was not modified
+2024-06-04 08:09:05.068 +01:00 [INF] The file /css/styles.css was not modified
+2024-06-04 08:09:04.830 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/css/template/style.css - null null
+2024-06-04 08:09:05.069 +01:00 [INF] The file /css/template/style.css was not modified
+2024-06-04 08:09:05.069 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/css/bootstrap/bootstrap.min.css - 304 null text/css 239.5623ms
+2024-06-04 08:09:05.069 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/css/template/style.css - 304 null text/css 239.3538ms
+2024-06-04 08:09:05.069 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/css/styles.css - 304 null text/css 239.3797ms
+2024-06-04 08:09:05.070 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/images/logo.png - null null
+2024-06-04 08:09:05.070 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/images/favicon.png - null null
+2024-06-04 08:09:05.070 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 08:09:05.069 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/css/template/cs-skin-elastic.css - 304 null text/css 241.702ms
+2024-06-04 08:09:05.070 +01:00 [INF] The file /images/logo.png was not modified
+2024-06-04 08:09:05.070 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/images/logo.png - 304 null image/png 0.6184ms
+2024-06-04 08:09:05.071 +01:00 [INF] The file /images/favicon.png was not modified
+2024-06-04 08:09:05.071 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/images/favicon.png - 304 null image/png 1.2196ms
+2024-06-04 08:09:05.073 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 08:09:05.075 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/js/main.js - null null
+2024-06-04 08:09:05.076 +01:00 [INF] The file /js/main.js was not modified
+2024-06-04 08:09:05.076 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/js/main.js - 304 null text/javascript 1.8943ms
+2024-06-04 08:09:05.087 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 08:09:05.097 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 08:09:05.104 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 08:09:05.105 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 32.1974ms
+2024-06-04 08:09:05.310 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 240.3487ms
+2024-06-04 08:09:05.804 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 08:09:05.809 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 08:09:05.828 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 08:09:05.828 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 24.5755ms
+2024-06-04 08:09:05.836 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=uefyYX2GFpahK19vmAl8kA - null null
+2024-06-04 08:09:05.837 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 08:09:06.116 +01:00 [INF] Create teams user credential
+2024-06-04 08:09:06.376 +01:00 [INF] Get SSO token
+2024-06-04 08:09:08.783 +01:00 [INF] Get SSO token
+2024-06-04 08:09:12.653 +01:00 [INF] Get SSO token
+2024-06-04 08:09:13.011 +01:00 [INF] Get SSO token
+2024-06-04 08:30:08.406 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 08:30:08.413 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 08:30:08.447 +01:00 [INF] Create teams user credential
+2024-06-04 08:30:08.971 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 08:30:08.977 +01:00 [ERR] Connection id "0HN44CKHCJSBU", Request id "0HN44CKHCJSBU:00000019": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 08:30:08.980 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 574.3601ms
+2024-06-04 08:30:09.032 +01:00 [INF] Get SSO token
+2024-06-04 08:30:10.110 +01:00 [INF] Get SSO token
+2024-06-04 08:30:11.367 +01:00 [INF] Get SSO token
+2024-06-04 08:30:11.663 +01:00 [INF] Get SSO token
+2024-06-04 08:30:13.073 +01:00 [INF] Get SSO token
+2024-06-04 08:30:13.402 +01:00 [INF] Get SSO token
+2024-06-04 08:30:14.624 +01:00 [INF] Get SSO token
+2024-06-04 08:30:15.039 +01:00 [INF] Get SSO token
+2024-06-04 08:30:16.383 +01:00 [INF] Get SSO token
+2024-06-04 08:30:16.669 +01:00 [INF] Get SSO token
+2024-06-04 08:30:17.624 +01:00 [INF] Get SSO token
+2024-06-04 08:30:17.949 +01:00 [INF] Get SSO token
+2024-06-04 09:00:09.086 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 09:00:10.875 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 09:00:10.875 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 09:00:10.879 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 09:00:10.880 +01:00 [INF] Hosting environment: Development
+2024-06-04 09:00:10.880 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 09:00:20.773 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundary0so354BBqwyNzQSM 359
+2024-06-04 09:00:21.263 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:00:21.501 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:00:21.504 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 736.7444ms
+2024-06-04 09:01:37.211 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:01:37.446 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:01:38.602 +01:00 [INF] Create teams user credential
+2024-06-04 09:01:39.144 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:01:39.164 +01:00 [ERR] Connection id "0HN44DHDRAEL2", Request id "0HN44DHDRAEL2:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:01:39.265 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 2054.207ms
+2024-06-04 09:01:39.302 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:01:39.308 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:01:39.318 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:01:39.319 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:01:39.320 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:01:39.321 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 18.8113ms
+2024-06-04 09:01:39.403 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 85.9258ms
+2024-06-04 09:01:40.258 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:01:40.261 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:01:40.282 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:01:40.282 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 24.0482ms
+2024-06-04 09:01:40.322 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=RiUjFPj969QoxcoksrohnQ - null null
+2024-06-04 09:01:40.322 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:01:40.647 +01:00 [INF] Create teams user credential
+2024-06-04 09:01:41.229 +01:00 [INF] Get SSO token
+2024-06-04 09:01:43.156 +01:00 [INF] Get SSO token
+2024-06-04 09:01:45.701 +01:00 [INF] Get SSO token
+2024-06-04 09:01:46.066 +01:00 [INF] Get SSO token
+2024-06-04 09:01:49.896 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:01:49.900 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:01:49.920 +01:00 [INF] Create teams user credential
+2024-06-04 09:01:50.045 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:01:50.048 +01:00 [ERR] Connection id "0HN44DHDRAEL2", Request id "0HN44DHDRAEL2:0000000B": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:01:50.052 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 156.3647ms
+2024-06-04 09:01:50.092 +01:00 [INF] Get SSO token
+2024-06-04 09:01:50.424 +01:00 [INF] Get SSO token
+2024-06-04 09:01:51.448 +01:00 [INF] Get SSO token
+2024-06-04 09:01:51.743 +01:00 [INF] Get SSO token
+2024-06-04 09:01:53.104 +01:00 [INF] Get SSO token
+2024-06-04 09:01:53.374 +01:00 [INF] Get SSO token
+2024-06-04 09:01:54.388 +01:00 [INF] Get SSO token
+2024-06-04 09:01:54.671 +01:00 [INF] Get SSO token
+2024-06-04 09:08:54.173 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 09:08:54.952 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 09:08:54.953 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 09:08:54.958 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 09:08:54.959 +01:00 [INF] Hosting environment: Development
+2024-06-04 09:08:54.959 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 09:09:14.066 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:09:14.500 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:14.529 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:14.534 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 476.4772ms
+2024-06-04 09:09:14.654 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=HhV4AONGXUHSADVFoYEQpw - null null
+2024-06-04 09:09:14.662 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:16.554 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundarymhakYSDcQBMKXgBh 359
+2024-06-04 09:09:16.560 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:16.584 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:16.585 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 30.7686ms
+2024-06-04 09:09:16.733 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:16.790 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=HhV4AONGXUHSADVFoYEQpw - 200 null null 2136.0441ms
+2024-06-04 09:09:39.176 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:09:39.979 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:09:40.827 +01:00 [INF] Create teams user credential
+2024-06-04 09:09:41.304 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:09:41.344 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:09:41.576 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 2399.796ms
+2024-06-04 09:09:41.872 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:09:41.880 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:09:41.882 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:09:41.894 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:09:41.895 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:09:41.896 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 15.518ms
+2024-06-04 09:09:42.000 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.3072ms
+2024-06-04 09:09:43.405 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:09:43.405 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:43.406 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:43.407 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 2.2093ms
+2024-06-04 09:09:43.427 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=oZ_BfEXl7vDs1HzcvNQi4Q - null null
+2024-06-04 09:09:43.427 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:09:43.706 +01:00 [INF] Create teams user credential
+2024-06-04 09:09:44.326 +01:00 [INF] Get SSO token
+2024-06-04 09:09:46.835 +01:00 [INF] Get SSO token
+2024-06-04 09:09:49.294 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:09:49.299 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:09:49.357 +01:00 [INF] Create teams user credential
+2024-06-04 09:09:49.540 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:09:49.541 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:0000000B": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:09:49.544 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 250.2393ms
+2024-06-04 09:09:49.608 +01:00 [INF] Get SSO token
+2024-06-04 09:09:49.966 +01:00 [INF] Get SSO token
+2024-06-04 09:09:51.265 +01:00 [INF] Get SSO token
+2024-06-04 09:09:51.613 +01:00 [INF] Get SSO token
+2024-06-04 09:09:53.047 +01:00 [INF] Get SSO token
+2024-06-04 09:09:53.444 +01:00 [INF] Get SSO token
+2024-06-04 09:09:54.587 +01:00 [INF] Get SSO token
+2024-06-04 09:09:54.937 +01:00 [INF] Get SSO token
+2024-06-04 09:10:17.307 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundaryNMCNGxfNncZyFF6M 359
+2024-06-04 09:10:17.307 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:10:17.307 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:17.311 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:10:17.399 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:17.399 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=oZ_BfEXl7vDs1HzcvNQi4Q - 200 null null 33972.3558ms
+2024-06-04 09:10:17.403 +01:00 [INF] Create teams user credential
+2024-06-04 09:10:17.406 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:10:17.407 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:0000000F": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:10:17.409 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 102.0964ms
+2024-06-04 09:10:17.412 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:17.412 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 106.664ms
+2024-06-04 09:10:17.508 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:10:17.513 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:10:17.514 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:10:17.514 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:10:17.514 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 6.2407ms
+2024-06-04 09:10:17.515 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:10:17.539 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 23.7036ms
+2024-06-04 09:10:18.208 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:10:18.208 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:18.209 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:18.210 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 1.8602ms
+2024-06-04 09:10:18.220 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=wNkP0Wp4q5TiAO0-Jj90Qg - null null
+2024-06-04 09:10:18.220 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:10:18.249 +01:00 [INF] Create teams user credential
+2024-06-04 09:10:18.300 +01:00 [INF] Get SSO token
+2024-06-04 09:10:18.709 +01:00 [INF] Get SSO token
+2024-06-04 09:10:20.387 +01:00 [INF] Get SSO token
+2024-06-04 09:10:20.744 +01:00 [INF] Get SSO token
+2024-06-04 09:10:23.407 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:10:23.410 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:10:23.411 +01:00 [INF] Create teams user credential
+2024-06-04 09:10:23.417 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:10:23.418 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:00000019": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:10:23.424 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 16.4901ms
+2024-06-04 09:10:23.444 +01:00 [INF] Get SSO token
+2024-06-04 09:10:23.771 +01:00 [INF] Get SSO token
+2024-06-04 09:10:25.096 +01:00 [INF] Get SSO token
+2024-06-04 09:10:25.516 +01:00 [INF] Get SSO token
+2024-06-04 09:10:26.793 +01:00 [INF] Get SSO token
+2024-06-04 09:10:27.161 +01:00 [INF] Get SSO token
+2024-06-04 09:10:28.301 +01:00 [INF] Get SSO token
+2024-06-04 09:10:29.025 +01:00 [INF] Get SSO token
+2024-06-04 09:15:54.768 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-06-04 09:16:21.470 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundary9dSgdLOsnHtGQPhA 359
+2024-06-04 09:16:21.471 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:22.698 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:22.698 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=wNkP0Wp4q5TiAO0-Jj90Qg - 200 null null 364478.2668ms
+2024-06-04 09:16:22.703 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:22.704 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 1233.4264ms
+2024-06-04 09:16:22.889 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:16:22.908 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:16:22.912 +01:00 [INF] Create teams user credential
+2024-06-04 09:16:22.953 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:16:22.953 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:0000001D": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:16:22.955 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 66.2954ms
+2024-06-04 09:16:23.138 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:16:23.139 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:16:23.139 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:16:23.140 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:16:23.140 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 1.9119ms
+2024-06-04 09:16:23.163 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:16:23.179 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 15.833ms
+2024-06-04 09:16:24.170 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:16:24.171 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:24.171 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:24.171 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 0.8452ms
+2024-06-04 09:16:24.177 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=Cn_bV4Panx_A0AUefIHLuw - null null
+2024-06-04 09:16:24.178 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:16:24.218 +01:00 [INF] Create teams user credential
+2024-06-04 09:16:24.420 +01:00 [INF] Get SSO token
+2024-06-04 09:16:25.460 +01:00 [INF] Get SSO token
+2024-06-04 09:16:27.009 +01:00 [INF] Get SSO token
+2024-06-04 09:16:27.357 +01:00 [INF] Get SSO token
+2024-06-04 09:16:31.048 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:16:31.050 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:16:31.052 +01:00 [INF] Create teams user credential
+2024-06-04 09:16:31.190 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:16:31.191 +01:00 [ERR] Connection id "0HN44DMA4U3H3", Request id "0HN44DMA4U3H3:00000027": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:16:31.193 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 145.0332ms
+2024-06-04 09:16:31.232 +01:00 [INF] Get SSO token
+2024-06-04 09:16:31.555 +01:00 [INF] Get SSO token
+2024-06-04 09:16:32.549 +01:00 [INF] Get SSO token
+2024-06-04 09:16:32.892 +01:00 [INF] Get SSO token
+2024-06-04 09:16:34.172 +01:00 [INF] Get SSO token
+2024-06-04 09:16:34.541 +01:00 [INF] Get SSO token
+2024-06-04 09:16:35.886 +01:00 [INF] Get SSO token
+2024-06-04 09:16:36.146 +01:00 [INF] Get SSO token
+2024-06-04 09:16:37.129 +01:00 [INF] Get SSO token
+2024-06-04 09:16:37.410 +01:00 [INF] Get SSO token
+2024-06-04 09:20:30.097 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-06-04 09:21:33.545 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-06-04 09:41:14.004 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-06-04 09:41:36.605 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundaryG1YOjjMD3tzIWBr2 359
+2024-06-04 09:41:36.606 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:41:36.617 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:41:36.617 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 12.5403ms
+2024-06-04 09:41:36.618 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:41:36.625 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:41:36.625 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=Cn_bV4Panx_A0AUefIHLuw - 200 null null 1512447.4867ms
+2024-06-04 09:41:36.628 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:41:36.630 +01:00 [INF] Create teams user credential
+2024-06-04 09:43:01.402 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 09:43:02.888 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 09:43:02.888 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 09:43:02.896 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 09:43:02.897 +01:00 [INF] Hosting environment: Development
+2024-06-04 09:43:02.897 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 09:43:54.273 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:43:55.578 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:43:57.693 +01:00 [INF] Create teams user credential
+2024-06-04 09:43:59.698 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:43:59.895 +01:00 [ERR] Connection id "0HN44E9CAS6DK", Request id "0HN44E9CAS6DK:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:44:00.098 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:44:00.098 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:44:00.392 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 6135.6991ms
+2024-06-04 09:44:00.399 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:44:00.432 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:44:00.434 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:44:00.435 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 336.689ms
+2024-06-04 09:44:00.756 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 658.4722ms
+2024-06-04 09:44:02.003 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:44:02.012 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:44:03.134 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:44:03.134 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 1131.9378ms
+2024-06-04 09:44:03.151 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=OcA1-2A0DxCGNgpkJeuEzA - null null
+2024-06-04 09:44:03.152 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:44:04.537 +01:00 [INF] Create teams user credential
+2024-06-04 09:44:06.564 +01:00 [INF] Get SSO token
+2024-06-04 09:44:10.639 +01:00 [INF] Get SSO token
+2024-06-04 09:44:15.413 +01:00 [INF] Get SSO token
+2024-06-04 09:44:15.775 +01:00 [INF] Get SSO token
+2024-06-04 09:44:18.828 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:44:18.833 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:44:19.056 +01:00 [INF] Create teams user credential
+2024-06-04 09:44:21.090 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:44:21.098 +01:00 [ERR] Connection id "0HN44E9CAS6DK", Request id "0HN44E9CAS6DK:0000000B": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:44:21.105 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 2277.0419ms
+2024-06-04 09:44:21.323 +01:00 [INF] Get SSO token
+2024-06-04 09:44:21.664 +01:00 [INF] Get SSO token
+2024-06-04 09:44:23.446 +01:00 [INF] Get SSO token
+2024-06-04 09:44:23.834 +01:00 [INF] Get SSO token
+2024-06-04 09:44:25.440 +01:00 [INF] Get SSO token
+2024-06-04 09:44:25.793 +01:00 [INF] Get SSO token
+2024-06-04 09:44:27.109 +01:00 [INF] Get SSO token
+2024-06-04 09:44:27.463 +01:00 [INF] Get SSO token
+2024-06-04 09:44:28.782 +01:00 [INF] Get SSO token
+2024-06-04 09:44:29.179 +01:00 [INF] Get SSO token
+2024-06-04 09:44:30.306 +01:00 [INF] Get SSO token
+2024-06-04 09:44:30.658 +01:00 [INF] Get SSO token
+2024-06-04 09:45:39.665 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 09:45:39.701 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundaryOVaU3B7ybHoji1mm 359
+2024-06-04 09:45:39.704 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:39.709 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 09:45:39.728 +01:00 [INF] Create teams user credential
+2024-06-04 09:45:40.325 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 09:45:40.327 +01:00 [ERR] Connection id "0HN44E9CAS6DK", Request id "0HN44E9CAS6DK:0000000D": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:45:40.330 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 672.1211ms
+2024-06-04 09:45:40.447 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 09:45:40.450 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 09:45:40.451 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 09:45:40.451 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 09:45:40.452 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 4.4433ms
+2024-06-04 09:45:40.452 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 09:45:40.468 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:40.469 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=OcA1-2A0DxCGNgpkJeuEzA - 200 null null 97317.857ms
+2024-06-04 09:45:40.664 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 212.4472ms
+2024-06-04 09:45:40.750 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:40.751 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 1049.8697ms
+2024-06-04 09:45:41.428 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 09:45:41.428 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:41.429 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:41.431 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 1.7844ms
+2024-06-04 09:45:41.446 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=QVL-rKp9MRaNE8bHseCOFA - null null
+2024-06-04 09:45:41.446 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 09:45:41.500 +01:00 [INF] Create teams user credential
+2024-06-04 09:45:41.691 +01:00 [INF] Get SSO token
+2024-06-04 09:45:43.012 +01:00 [INF] Get SSO token
+2024-06-04 09:45:44.534 +01:00 [INF] Get SSO token
+2024-06-04 09:45:44.893 +01:00 [INF] Get SSO token
+2024-06-04 09:45:48.077 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 09:45:48.085 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 09:45:48.087 +01:00 [INF] Create teams user credential
+2024-06-04 09:45:50.156 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 09:45:50.159 +01:00 [ERR] Connection id "0HN44E9CAS6DK", Request id "0HN44E9CAS6DK:00000019": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 09:45:50.161 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 2084.3454ms
+2024-06-04 09:45:50.209 +01:00 [INF] Get SSO token
+2024-06-04 09:45:50.517 +01:00 [INF] Get SSO token
+2024-06-04 09:45:51.609 +01:00 [INF] Get SSO token
+2024-06-04 09:45:51.954 +01:00 [INF] Get SSO token
+2024-06-04 09:45:53.332 +01:00 [INF] Get SSO token
+2024-06-04 09:45:53.701 +01:00 [INF] Get SSO token
+2024-06-04 09:45:54.979 +01:00 [INF] Get SSO token
+2024-06-04 09:45:55.343 +01:00 [INF] Get SSO token
+2024-06-04 09:45:56.501 +01:00 [INF] Get SSO token
+2024-06-04 09:45:56.880 +01:00 [INF] Get SSO token
+2024-06-04 09:45:57.932 +01:00 [INF] Get SSO token
+2024-06-04 09:45:58.287 +01:00 [INF] Get SSO token
+2024-06-04 09:46:09.585 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-06-04 10:12:12.843 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 10:12:15.936 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 10:12:15.936 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 10:12:15.945 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 10:12:15.946 +01:00 [INF] Hosting environment: Development
+2024-06-04 10:12:15.946 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 10:14:42.402 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 10:14:43.007 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 10:14:45.823 +01:00 [INF] Create teams user credential
+2024-06-04 10:14:47.425 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 10:14:47.546 +01:00 [ERR] Connection id "0HN44EPMRVI1K", Request id "0HN44EPMRVI1K:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 10:14:47.768 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 5386.8809ms
+2024-06-04 10:14:48.068 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 10:14:48.075 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 10:14:48.082 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 10:14:48.084 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 10:14:48.084 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 16.7479ms
+2024-06-04 10:14:48.214 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 10:14:48.747 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 532.6454ms
+2024-06-04 10:14:49.897 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 10:14:49.900 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 10:14:49.971 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 10:14:49.972 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 74.7567ms
+2024-06-04 10:14:49.981 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=slnUdyXxH4g1ihQla108IQ - null null
+2024-06-04 10:14:49.982 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 10:14:51.525 +01:00 [INF] Create teams user credential
+2024-06-04 10:14:52.736 +01:00 [INF] Get SSO token
+2024-06-04 10:14:57.318 +01:00 [INF] Get SSO token
+2024-06-04 10:15:01.711 +01:00 [INF] Get SSO token
+2024-06-04 10:15:02.082 +01:00 [INF] Get SSO token
+2024-06-04 10:15:08.345 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 10:15:08.349 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 10:15:09.319 +01:00 [INF] Create teams user credential
+2024-06-04 10:15:16.522 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 10:15:16.524 +01:00 [ERR] Connection id "0HN44EPMRVI1L", Request id "0HN44EPMRVI1L:00000009": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 10:15:16.527 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 8182.9201ms
+2024-06-04 10:15:16.674 +01:00 [INF] Get SSO token
+2024-06-04 10:15:17.014 +01:00 [INF] Get SSO token
+2024-06-04 10:15:19.392 +01:00 [INF] Get SSO token
+2024-06-04 10:15:19.723 +01:00 [INF] Get SSO token
+2024-06-04 10:15:21.896 +01:00 [INF] Get SSO token
+2024-06-04 10:15:22.257 +01:00 [INF] Get SSO token
+2024-06-04 10:15:23.812 +01:00 [INF] Get SSO token
+2024-06-04 10:15:24.157 +01:00 [INF] Get SSO token
+2024-06-04 10:15:25.758 +01:00 [INF] Get SSO token
+2024-06-04 10:15:26.131 +01:00 [INF] Get SSO token
+2024-06-04 10:15:27.539 +01:00 [INF] Get SSO token
+2024-06-04 10:15:27.893 +01:00 [INF] Get SSO token
+2024-06-04 11:00:37.217 +01:00 [INF] User profile is available. Using 'C:\Users\Brigitte HOUSSA SAVA\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-04 11:00:37.934 +01:00 [INF] Now listening on: https://localhost:44302
+2024-06-04 11:00:37.934 +01:00 [INF] Now listening on: http://localhost:2544
+2024-06-04 11:00:37.938 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-04 11:00:37.939 +01:00 [INF] Hosting environment: Development
+2024-06-04 11:00:37.939 +01:00 [INF] Content root path: C:\Users\Brigitte HOUSSA SAVA\Documents\GEC IOKEO\Kms
+2024-06-04 11:04:36.653 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 11:04:36.962 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 11:04:37.647 +01:00 [INF] Create teams user credential
+2024-06-04 11:04:37.954 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 11:04:37.980 +01:00 [ERR] Connection id "0HN44FKNLNEQF", Request id "0HN44FKNLNEQF:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 11:04:38.113 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 11:04:38.159 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 11:04:38.238 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 1591.4241ms
+2024-06-04 11:04:38.243 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 11:04:38.262 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 11:04:38.263 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 11:04:38.263 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 104.0305ms
+2024-06-04 11:04:38.363 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 250.4343ms
+2024-06-04 11:04:39.184 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 11:04:39.193 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:04:39.226 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:04:39.230 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 42.4373ms
+2024-06-04 11:04:39.244 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=FSA6oul1uA60jJwwNYcKMw - null null
+2024-06-04 11:04:39.245 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:04:39.919 +01:00 [INF] Create teams user credential
+2024-06-04 11:04:40.223 +01:00 [INF] Get SSO token
+2024-06-04 11:04:42.243 +01:00 [INF] Get SSO token
+2024-06-04 11:04:44.182 +01:00 [INF] Get SSO token
+2024-06-04 11:04:44.555 +01:00 [INF] Get SSO token
+2024-06-04 11:04:47.385 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 11:04:47.388 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 11:04:47.409 +01:00 [INF] Create teams user credential
+2024-06-04 11:04:47.467 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 11:04:47.468 +01:00 [ERR] Connection id "0HN44FKNLNEQF", Request id "0HN44FKNLNEQF:0000000B": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 11:04:47.473 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 87.6903ms
+2024-06-04 11:04:47.540 +01:00 [INF] Get SSO token
+2024-06-04 11:04:47.874 +01:00 [INF] Get SSO token
+2024-06-04 11:13:46.724 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/disconnect - multipart/form-data; boundary=----WebKitFormBoundaryAblnBPO0gKZKaNhp 359
+2024-06-04 11:13:46.730 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:46.762 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:46.762 +01:00 [INF] Request finished HTTP/2 CONNECT https://localhost:44302/_blazor?id=FSA6oul1uA60jJwwNYcKMw - 200 null null 547518.0162ms
+2024-06-04 11:13:46.801 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:46.801 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/disconnect - 200 0 null 77.0842ms
+2024-06-04 11:13:46.832 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/tab - null null
+2024-06-04 11:13:46.841 +01:00 [INF] Executing endpoint '/tab (/tab)'
+2024-06-04 11:13:46.858 +01:00 [INF] Create teams user credential
+2024-06-04 11:13:46.862 +01:00 [INF] Executed endpoint '/tab (/tab)'
+2024-06-04 11:13:46.863 +01:00 [ERR] Connection id "0HN44FKNLNEQF", Request id "0HN44FKNLNEQF:0000000F": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 11:13:46.865 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/tab - 200 null text/html; charset=utf-8 32.1812ms
+2024-06-04 11:13:47.076 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - null null
+2024-06-04 11:13:47.080 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/_vs/browserLink - null null
+2024-06-04 11:13:47.080 +01:00 [INF] Executing endpoint 'Blazor web static files'
+2024-06-04 11:13:47.081 +01:00 [INF] The file /_framework/blazor.web.js was not modified
+2024-06-04 11:13:47.081 +01:00 [INF] Executed endpoint 'Blazor web static files'
+2024-06-04 11:13:47.082 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_framework/blazor.web.js - 304 null text/javascript 5.2002ms
+2024-06-04 11:13:47.100 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/_vs/browserLink - 200 null text/javascript; charset=UTF-8 19.9587ms
+2024-06-04 11:13:47.942 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - null 0
+2024-06-04 11:13:47.943 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:47.943 +01:00 [INF] Executed endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:47.944 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44302/_blazor/negotiate?negotiateVersion=1 - 200 316 application/json 1.5776ms
+2024-06-04 11:13:47.984 +01:00 [INF] Request starting HTTP/2 CONNECT https://localhost:44302/_blazor?id=MpGmJrQ6iUy_hhknsxWwnw - null null
+2024-06-04 11:13:47.985 +01:00 [INF] Executing endpoint 'Microsoft.AspNetCore.Routing.RouteEndpoint'
+2024-06-04 11:13:48.058 +01:00 [INF] Create teams user credential
+2024-06-04 11:13:48.162 +01:00 [INF] Get SSO token
+2024-06-04 11:13:49.003 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44302/addmail - null null
+2024-06-04 11:13:49.006 +01:00 [INF] Executing endpoint '/addmail (/addmail)'
+2024-06-04 11:13:49.009 +01:00 [INF] Create teams user credential
+2024-06-04 11:13:49.017 +01:00 [INF] Executed endpoint '/addmail (/addmail)'
+2024-06-04 11:13:49.018 +01:00 [ERR] Connection id "0HN44FKNLNEQF", Request id "0HN44FKNLNEQF:00000019": An unhandled exception was thrown by the application.
+System.InvalidOperationException: JavaScript interop calls cannot be issued at this time. This is because the component is being statically rendered. When prerendering is enabled, JavaScript interop calls can only be performed during the OnAfterRenderAsync lifecycle method.
+   at Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime.BeginInvokeJS(Int64 asyncHandle, String identifier, String argsJson, JSCallResultType resultType, Int64 targetInstanceId)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, CancellationToken cancellationToken, Object[] args)
+   at Microsoft.JSInterop.JSRuntime.InvokeAsync[TValue](Int64 targetInstanceId, String identifier, Object[] args)
+   at Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(IJSRuntime jsRuntime, String identifier, Object[] args)
+   at Microsoft.TeamsFx.TeamsUserCredential.ImportTeamsSdk(IJSRuntime jsRuntime)
+   at Microsoft.TeamsFx.TeamsUserCredential.DisposeAsync()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.<DisposeAsync>g__Await|26_0(Int32 i, ValueTask vt, List`1 toDispose)
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|242_0(HttpProtocol protocol, Stack`1 events)
+2024-06-04 11:13:49.023 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44302/addmail - 200 null text/html; charset=utf-8 19.7751ms
+2024-06-04 11:13:49.052 +01:00 [INF] Get SSO token
+2024-06-04 11:13:49.176 +01:00 [INF] Get SSO token
+2024-06-04 11:13:49.493 +01:00 [INF] Get SSO token

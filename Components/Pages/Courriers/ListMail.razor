@@ -1,0 +1,167 @@
+﻿@using System.IO
+@using System.Linq
+@using Azure.Core
+@using Azure.Identity;
+@using Microsoft.Graph
+@using Microsoft.Graph.Models;
+@using Microsoft.Extensions.Configuration
+@using Kms.Services
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject GraphClientService graphClientService
+@inject SharePointList sharePointList
+@inject NavigationManager MyNavigationManager
+@rendermode InteractiveServer
+@page "/listemail"
+
+<div class="d-flex">
+
+@if (!string.IsNullOrEmpty(@ErrorMessage))
+{
+    <div class="error">@ErrorMessage</div>
+}
+else if (isLoading)
+{
+        <div class="d-flex justify-content-center align-items-center">
+        <div class="spinner-grow text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+            </div>
+            <!-- .animated -->
+            <!-- Courriers Cards -->
+            <div class="card border-success mb-3" style="max-width: 35rem;">
+                <div class="card-header bg-transparent border-success h5">Courriers à traiter</div>
+                <div class="card-body">
+                    @foreach (var courrier in mails)
+                    {
+                        <ul class="list-unstyled">
+                            <li> <a href="@($"/details/{courrier.Id}")"> @courrier.Fields?.AdditionalData["Title"]</a> </li>
+                        </ul>
+                    }
+                </div>
+
+            </div>
+            <!-- Courriers Cards -->
+         
+            @* <div class="col-9 m-1">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Objet du courrier</th>
+                            <th>Priorité</th>
+                            <th>Expéditeur</th>
+                            <th>Date du courrier</th>
+                            <th>Date d'arrivée</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var courrier in courriers)
+                        {
+                            <tr>
+                                <td>@courrier.Fields?.AdditionalData["Title"]</td>
+                                <td>@(courrier.Fields?.AdditionalData["priority"] ?? " ")</td>
+                                <td>@(courrier.Fields?.AdditionalData["sender"] ?? " ")</td>
+                                <td>@(courrier.Fields?.AdditionalData["mailDate"] == null ? "-" : ((DateTime)courrier.Fields?.AdditionalData["mailDate"]).ToLocalTime().ToString("dd/MM/yyyy"))</td>
+                                <td>@(courrier.Fields?.AdditionalData["arrivalDate"] == null ? "-" : ((DateTime)courrier.Fields?.AdditionalData["arrivalDate"]).ToLocalTime().ToString("dd/MM/yyyy"))</td>
+                                    <td><a href="@($"/details/{courrier.Id}")">Consulter</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div> *@
+    </div>
+   
+
+}
+</div>
+@code {
+    private bool isLoading = true;
+    private IList<ListItem> mails = new List<ListItem>();//l'objet qui contiendras la liste renvoyé par l'API
+    private List<ListItem> courriers = new List<ListItem>();//l'objet qui contiendra la liste des courriers par user connecté
+    private List<ListItem> mailsRun = new List<ListItem>();//l'objet qui contiendra la liste des courriers à traiter
+    private List<ListItem> mailsSign = new List<ListItem>();//l'objet qui contiendra la liste des courriers à signer
+    private List<Group> groupe = new List<Group>();
+    private readonly string _scope = "Sites.ReadWrite.All";//la permission necéssaire pour la requête
+    private readonly string _scope2 = "Group.Read.All";
+    private string ErrorMessage { get; set; }//le message d'erreur (facultatif)
+
+    //Quand la page s'initialise
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (await graphClientService.HasPermission(_scope2))
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();//obtenir un token d'authentification
+            var graph = graphClientService.GetGraphServiceClient(_scope2, tokenCredential);//Créer un client graph qui utilise le token précedent
+
+            var result = await graph.Me.TransitiveMemberOf.GraphGroup.GetAsync((requestConfiguration) =>
+                        {
+                            requestConfiguration.QueryParameters.Search = "\"displayName:responsable courrier\"";
+                            requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
+                        });
+            groupe = result?.Value?? new List<Group>();
+
+            if (groupe.Count == 0)
+            {
+                ErrorMessage = "Vous n'êtes pas responsable courrier";
+            }
+            else
+            {
+                if (await graphClientService.HasPermission(_scope))//Vérifie si l'utilisateur à l'autorisation requis pour le scope
+                {
+
+                    await ShowList();//Si oui, afficher la liste
+                }
+                else
+                {
+                    ErrorMessage = "Permission refusée";
+                }
+            }            
+        }
+        else
+        {
+            ErrorMessage = "Pas de permision pour vérifier le groupe auquel l'utilisateur est affilié";
+        }
+
+    }
+    private async Task ShowList()
+    {    
+        isLoading = true;
+        
+        var tokenCredential = await graphClientService.GetOnBehalfOfCredential();//obtenir un token d'authentification
+        var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);//Créer un client graph qui utilise le token précedent
+        isLoading = false;
+        
+        //la requête pour récupérer une liste d'élements depuis un site sharepoint
+        var items = await graph.Sites[sharePointList.SiteId].Lists[sharePointList.ListId].Items.GetAsync((config) =>
+        {
+            config.QueryParameters.Expand = new[] { "fields" };
+        });
+        //Affectation de la liste de tout les courriers dans la variable mails.
+        mails = items?.Value ?? new List<ListItem>();
+
+        //Requête de récupération des informations de l'utilisateur connecté à Teams:
+        var user = await graph.Me.GetAsync((requestConfiguration) =>
+            {
+                requestConfiguration.QueryParameters.Select = new string[] { "displayName" };
+            });
+        //Affectation du nom de l'utilisateur à la variable filter 
+        string filterUser = user.DisplayName;
+        var filterIterms = (from mail in mails
+                            where mail.Fields.AdditionalData["processor"].ToString() == filterUser
+                            select mail);
+
+        courriers = filterIterms.ToList();
+
+        isLoading = false;
+
+    }
+}

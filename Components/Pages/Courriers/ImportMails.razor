@@ -1,0 +1,43 @@
+﻿@using System.IO
+@using System.Linq
+@using Azure.Core
+@using Azure.Identity;
+@using Microsoft.Graph
+@using Microsoft.Graph.Models;
+@using Microsoft.Extensions.Configuration
+@using Kms.Services
+@inject TeamsFx teamsfx
+@inject TeamsUserCredential teamsUserCredential
+@inject IConfiguration Configuration
+@inject GraphClientService graphClientService
+@inject SharePointList sharePointList
+
+
+@foreach(var messages in emails)
+{
+    <a href="@messages.WebLink">@messages.Subject</a><br />
+}
+
+
+@code {
+    private string ErrorMessage { get; set; }//le message d'erreur (facultatif)
+    private readonly string _scope = "Mail.ReadWrite";//la permission necéssaire pour la requête
+    private List<Microsoft.Graph.Models.Message> emails = new List<Microsoft.Graph.Models.Message>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await graphClientService.HasPermission(_scope))
+        {
+            var tokenCredential = await graphClientService.GetOnBehalfOfCredential();
+            var graph = graphClientService.GetGraphServiceClient(_scope, tokenCredential);
+
+            var result = await graph.Me.Messages.GetAsync((requestConfiguration) =>
+            {
+                requestConfiguration.QueryParameters.Top = 4;
+            });
+
+            emails = result?.Value ?? new List<Microsoft.Graph.Models.Message>();
+        }
+        
+    }
+}
